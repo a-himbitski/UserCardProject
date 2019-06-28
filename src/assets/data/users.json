@@ -1,0 +1,44 @@
+{
+  "Users": [
+    {
+      "id": 1,
+      "firstName": "Dylan",
+      "lastName": "Doe",
+      "age": 20,
+      "skills": [
+        "strength",
+        "agility"
+      ]
+    },
+    {
+      "id": 2,
+      "firstName": "Jack",
+      "lastName": "Goe",
+      "age": 30,
+      "skills": [
+        "jump",
+        "hack"
+      ]
+    },
+    {
+      "id": 3,
+      "firstName": "Jimm",
+      "lastName": "Boe",
+      "age": 25,
+      "skills": [
+        "run",
+        "craft"
+      ]
+    },
+    {
+      "id": 4,
+      "firstName": "Josh",
+      "lastName": "Roe",
+      "age": 35,
+      "skills": [
+        "build",
+        "climb"
+      ]
+    }
+  ]
+}
