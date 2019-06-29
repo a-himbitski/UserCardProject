@@ -7,7 +7,6 @@ import { FormsModule } from '@angular/forms';
 import { UserService } from './services/user.service';
 import {HttpClientModule} from '@angular/common/http';
 import { LikesPipe } from './likes.pipe';
-import {bootstrap} from 'bootstrap';
 import { UserDetailComponent } from './user-detail/user-detail.component';
  
 @NgModule({
