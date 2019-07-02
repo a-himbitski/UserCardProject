@@ -88,7 +88,7 @@ export class UserCardComponent implements OnInit {
     return  user.id === this._selectedId;
   }
 
-  ngOnDestroy(){
+  public ngOnDestroy(){
     this._roterSubscription.unsubscribe();
   }
 }

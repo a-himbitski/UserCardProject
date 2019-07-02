@@ -42,7 +42,7 @@ export class UserDetailComponent implements OnInit {
     this._router.navigate(['raiting'],{relativeTo: this._route});
   }
 
-  ngOnDestroy(){
+  public ngOnDestroy(){
     this._roterSubscription.unsubscribe();
   }
   

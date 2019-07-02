@@ -74,7 +74,7 @@ export class UserOverviewComponent implements OnInit {
       this._router.navigate(['/users',{ userId: this._currentUser.id, userColor:this._currentUser.IsUpdated.color }]);
   }
 
-  ngOnDestroy(){
+  public ngOnDestroy(){
     this._roterSubscription.unsubscribe();
   }
 }
