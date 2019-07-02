@@ -1,10 +1,1 @@
 /* You can add global styles to this file, and also import other style files */
-.list-group li.selected {
-    background-color: blue
-}
-.list-group li.disliked {
-    color: red
-}
-.list-group li.liked {
-    color: green
-}
