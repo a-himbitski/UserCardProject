@@ -7,6 +7,7 @@ export class User {
     private _statusLable:string;
     private _updateLable:string;
     private _isHidden: boolean;
+    private _IsUpdated:{ color: string; };
 
     public get id() : number {
       return this._id;
@@ -76,6 +77,14 @@ export class User {
     public getUpdateLable():string{
       return this._updateLable;
     }
+
+    public get IsUpdated():{ color: string; }{
+      return this._IsUpdated;
+    }
+    public set IsUpdated(value: { color: string; }) {
+      this._IsUpdated = value;
+    }
+
     private constructor(
       private _id:number,
       private _firstName: string,
@@ -87,6 +96,7 @@ export class User {
         this._statusLable = 'Edit Name';
         this. _isHidden = true;
         this._updateLable = "Update Name"
+        this._IsUpdated = { color:'blue' };
     }
     
     public onRatingUpdate(isLiked:boolean)

@@ -8,13 +8,17 @@ import { UserService } from './services/user.service';
 import {HttpClientModule} from '@angular/common/http';
 import { LikesPipe } from './likes.pipe';
 import { UserDetailComponent } from './user-detail/user-detail.component';
+import { UserRatingComponent } from './user-rating/user-rating.component';
+import { UserOverviewComponent } from './user-overview/user-overview.component';
  
 @NgModule({
   declarations: [
     AppComponent,
     LikesPipe,
     routingComponents,
-    UserDetailComponent
+    UserDetailComponent,
+    UserRatingComponent,
+    UserOverviewComponent
   ],
   imports: [
     BrowserModule,

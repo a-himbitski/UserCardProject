@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<div class="container">
+  <div class="row justify-content-md-center">
+      <p>{{user.firstName}} {{user.lastName}}</p>
+      <div class="btn-group btn-group row align-items-center col col-sm-4">
+          <button class="btn btn-success" [hidden]="user.getMax()" (click)="onLikeClick(user)">Like</button>
+          <button class="btn btn-danger"  [hidden]="user.getMin()" (click)="onDislikeClick(user)">Dislike</button>
+      </div>
+      <div class="col-md-auto">
+          <p class="h2" id="count" [ngStyle]="user.getStyle()">{{user.getRating()| customPipe}}</p>
+      </div>
+  </div>
+  <div class="btn-group btn-group row align-items-center col col-sm-4">
+    <div>
+      <button class="btn btn-secondary" (click)="onBackClick()">Back</button>
+    </div>
+</div>
+  <p [hidden]="user.getIsHidden()"> <input type="text" [(ngModel)] ="user.firstName"></p>       
+  <ul [hidden]="isHidden()">InternalError: {{getErrorMessage()}}</ul>
+</div>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<div class="container-fluid">
+    <h4>
+        <ul class="list-group">Personal Info:
+            <li class="list-group-item">name: {{user.firstName}} {{user.lastName}}</li>
+            <li class="list-group-item">age: {{user.age}}</li>
+        </ul>
+        <ul class="list-group">Skills:
+            <li class="list-group-item" *ngFor="let skill of user.skills">{{skill}}</li>
+        </ul> 
+        <p [hidden]="user.getIsHidden()"> <input type="text" [(ngModel)] ="user.firstName"></p>       
+        <ul [hidden]="isHidden()">InternalError: {{getErrorMessage()}}</ul>          
+        <div class="container">
+            <div class="row justify-content-md-center">
+                <div class="btn-group btn-group row align-items-center col col-sm-4">
+                    <button class="btn btn-secondary" (click)="onEditButtonClick(user)">{{user.getStatusLable()}}</button>
+                    <button class="btn btn-secondary" (click)="onUpdateButtonClick(user)">{{user.getUpdateLable()}}</button>
+                </div>
+            </div>
+        </div>   
+    </h4>
+    <div class="btn-group btn-group row align-items-center col col-sm-4">
+        <div >
+          <button class="btn btn-secondary" (click)="onNextClick()">Next</button>
+        </div>
+        <div>
+          <button class="btn btn-secondary" (click)="onPrevoiusClick()">Prevoius</button>
+        </div>
+        <div>
+          <button class="btn btn-secondary" (click)="onBackClick()">Back</button>
+        </div>
+    </div>
+</div>

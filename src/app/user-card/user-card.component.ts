@@ -3,7 +3,7 @@ import { UserService } from '../services/user.service';
 import { User } from 'src/model/user';
 import { catchError } from 'rxjs/operators';
 import { Observable, throwError, from } from 'rxjs';
-import {Router} from '@angular/router';
+import {Router, ActivatedRoute, ParamMap} from '@angular/router';
 
 @Component({
   selector: 'app-user-card',
@@ -15,13 +15,25 @@ export class UserCardComponent implements OnInit {
   private _errorMessage:string;
   private _errorIsHidden: boolean;
   private _users$: Observable<User[]>;
+  private _selectedId:number; 
+  private _userUpdateResultColor:string;
+  private _defaultUserColor:string;
 
   public get users$():Observable<User[]>{
     return this._users$;
   }
+
+  public getUserColor():string{
+       return this._userUpdateResultColor;
+  }
+
+  public getDefaultColor():string{
+        return this._defaultUserColor;
+  }
  
-  constructor(private _userService:UserService,private _router:Router) {
+  constructor(private _userService:UserService,private _router:Router, private _route:ActivatedRoute) {
       this._errorIsHidden = true;
+      this._defaultUserColor= 'black';
   }
 
   public ngOnInit():void {
@@ -32,6 +44,11 @@ export class UserCardComponent implements OnInit {
           this._errorIsHidden = false;
           return throwError(error)}
         ));
+
+    this._route.paramMap.subscribe((params: ParamMap) => {
+      this._selectedId = parseInt(params.get('userId'));   
+      this._userUpdateResultColor = params.get('userColor');
+      });
   }
 
   public onLikeClick(user:User): void {
@@ -64,6 +81,10 @@ export class UserCardComponent implements OnInit {
 
   public onUserSelected(user:User){
     this._router.navigate(['/users', user.id])
+  }
+
+  public isSelected(user:User){
+    return  user.id === this._selectedId;
   }
 }
 
