@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { UserService } from '../services/user.service';
 import { User } from 'src/model/user';
 import { catchError } from 'rxjs/operators';
-import { Observable, throwError, from } from 'rxjs';
+import { Observable, throwError, from, Subscription } from 'rxjs';
 import {Router, ActivatedRoute, ParamMap} from '@angular/router';
 
 @Component({
@@ -12,6 +12,7 @@ import {Router, ActivatedRoute, ParamMap} from '@angular/router';
 })
 export class UserCardComponent implements OnInit {
 
+  private _roterSubscription:Subscription;
   private _errorMessage:string;
   private _errorIsHidden: boolean;
   private _users$: Observable<User[]>;
@@ -45,7 +46,7 @@ export class UserCardComponent implements OnInit {
           return throwError(error)}
         ));
 
-    this._route.paramMap.subscribe((params: ParamMap) => {
+      this._roterSubscription = this._route.paramMap.subscribe((params: ParamMap) => {
       this._selectedId = parseInt(params.get('userId'));   
       this._userUpdateResultColor = params.get('userColor');
       });
@@ -85,6 +86,10 @@ export class UserCardComponent implements OnInit {
 
   public isSelected(user:User){
     return  user.id === this._selectedId;
+  }
+
+  ngOnDestroy(){
+    this._roterSubscription.unsubscribe();
   }
 }
 

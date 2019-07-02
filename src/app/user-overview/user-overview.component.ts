@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { UserService } from '../services/user.service';
 import { User } from 'src/model/user';
 import { ActivatedRoute, ParamMap, Router} from '@angular/router';
+import { Subscription } from 'rxjs';
+;
 @Component({
   selector: 'app-user-overview',
   templateUrl: './user-overview.component.html',
@@ -9,6 +11,7 @@ import { ActivatedRoute, ParamMap, Router} from '@angular/router';
 })
 export class UserOverviewComponent implements OnInit {
 
+  private _roterSubscription:Subscription;
   private _errorMessage:string;
   private _errorIsHidden: boolean;
   
@@ -23,7 +26,7 @@ export class UserOverviewComponent implements OnInit {
    }
 
    ngOnInit() {
-    this._route.parent.paramMap.subscribe((params) => {
+    this._roterSubscription= this._route.parent.paramMap.subscribe((params) => {
       let id = parseInt(params.get('id'));
       this._userService.getUserById(id).subscribe(user=>this._currentUser = user);
     });
@@ -61,14 +64,17 @@ export class UserOverviewComponent implements OnInit {
   {
     this._userService.getUserIndex(this._currentUser.id).then((index)=>{
       this._userService.getPrevoius(index).then((previous)=>{
-        this._router.navigate(['/users',previous.id]);
+          this._router.navigate(['/users',previous.id]);
       })
      });    
   }
 
   public onBackClick()
   {
-    this._router.navigate(['/users',{ userId: this._currentUser.id, userColor:this._currentUser.IsUpdated.color }]);
+      this._router.navigate(['/users',{ userId: this._currentUser.id, userColor:this._currentUser.IsUpdated.color }]);
   }
 
+  ngOnDestroy(){
+    this._roterSubscription.unsubscribe();
+  }
 }

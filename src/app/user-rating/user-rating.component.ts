@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit ,OnDestroy} from '@angular/core';
 import { UserService } from '../services/user.service';
 import { User } from 'src/model/user';
 import { ActivatedRoute, ParamMap, Router} from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-user-rating',
@@ -10,6 +11,7 @@ import { ActivatedRoute, ParamMap, Router} from '@angular/router';
 })
 export class UserRatingComponent implements OnInit {
 
+  private _roterSubscription:Subscription;
   private _errorMessage:string;
   private _errorIsHidden: boolean;
 
@@ -24,7 +26,7 @@ export class UserRatingComponent implements OnInit {
    }
 
   ngOnInit() {
-    this._route.parent.paramMap.subscribe((params) => {
+    this._roterSubscription = this._route.parent.paramMap.subscribe((params) => {
       let id = parseInt(params.get('id'));
       this._userService.getUserById(id).subscribe(user=>this._currentUser = user);
     });
@@ -68,6 +70,10 @@ export class UserRatingComponent implements OnInit {
 
   public onBackClick()
   {
-    this._router.navigate(['/users',{ userId: this._currentUser.id, userColor:this._currentUser.IsUpdated.color }]);
+      this._router.navigate(['/users',{ userId: this._currentUser.id, userColor:this._currentUser.IsUpdated.color }]);
+  }
+  
+  ngOnDestroy(){
+    this._roterSubscription.unsubscribe();
   }
 }
